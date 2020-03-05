@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace pair_comparison_method.Properties
+namespace WinFormInterface.Properties
 {
 
 
