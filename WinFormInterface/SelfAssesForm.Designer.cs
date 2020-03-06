@@ -69,6 +69,7 @@
             this.Controls.Add(this.butChoice2);
             this.Controls.Add(this.butChoice1);
             this.Name = "SelfAssesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SelfAssesForm";
             this.ResumeLayout(false);
 

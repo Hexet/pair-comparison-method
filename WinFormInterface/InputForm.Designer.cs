@@ -1,6 +1,6 @@
 ﻿namespace WinFormInterface
 {
-    partial class matrixInputForm
+    partial class InputForm
     {
         /// <summary>
         /// Required designer variable.
@@ -33,7 +33,9 @@
             this.filePathSelection = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.fldContent = new System.Windows.Forms.TextBox();
-            this.butMatrixProcessing = new System.Windows.Forms.Button();
+            this.butSaveFile = new System.Windows.Forms.Button();
+            this.butAlterChange = new System.Windows.Forms.Button();
+            this.butProcessingMatrix = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // butOpenFile
@@ -79,35 +81,56 @@
             this.fldContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.fldContent.Location = new System.Drawing.Point(14, 82);
+            this.fldContent.Location = new System.Drawing.Point(12, 71);
             this.fldContent.Multiline = true;
             this.fldContent.Name = "fldContent";
             this.fldContent.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.fldContent.Size = new System.Drawing.Size(773, 286);
             this.fldContent.TabIndex = 8;
             // 
-            // butMatrixProcessing
+            // butSaveFile
             // 
-            this.butMatrixProcessing.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butMatrixProcessing.Location = new System.Drawing.Point(713, 374);
-            this.butMatrixProcessing.Name = "butMatrixProcessing";
-            this.butMatrixProcessing.Size = new System.Drawing.Size(75, 23);
-            this.butMatrixProcessing.TabIndex = 9;
-            this.butMatrixProcessing.Text = "Обработать";
-            this.butMatrixProcessing.UseVisualStyleBackColor = true;
+            this.butSaveFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butSaveFile.Location = new System.Drawing.Point(631, 374);
+            this.butSaveFile.Name = "butSaveFile";
+            this.butSaveFile.Size = new System.Drawing.Size(75, 23);
+            this.butSaveFile.TabIndex = 10;
+            this.butSaveFile.Text = "Сохранить";
+            this.butSaveFile.UseVisualStyleBackColor = true;
             // 
-            // matrixInputForm
+            // butAlterChange
+            // 
+            this.butAlterChange.Location = new System.Drawing.Point(710, 374);
+            this.butAlterChange.Name = "butAlterChange";
+            this.butAlterChange.Size = new System.Drawing.Size(75, 23);
+            this.butAlterChange.TabIndex = 11;
+            this.butAlterChange.Text = "Выбрать";
+            this.butAlterChange.UseVisualStyleBackColor = true;
+            // 
+            // butProcessingMatrix
+            // 
+            this.butProcessingMatrix.Location = new System.Drawing.Point(710, 374);
+            this.butProcessingMatrix.Name = "butProcessingMatrix";
+            this.butProcessingMatrix.Size = new System.Drawing.Size(75, 23);
+            this.butProcessingMatrix.TabIndex = 12;
+            this.butProcessingMatrix.Text = "Обработать";
+            this.butProcessingMatrix.UseVisualStyleBackColor = true;
+            // 
+            // InputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.butMatrixProcessing);
+            this.Controls.Add(this.butProcessingMatrix);
+            this.Controls.Add(this.butAlterChange);
+            this.Controls.Add(this.butSaveFile);
             this.Controls.Add(this.fldContent);
             this.Controls.Add(this.butOpenFile);
             this.Controls.Add(this.butSelectFile);
             this.Controls.Add(this.filePathSelection);
             this.Controls.Add(this.label1);
-            this.Name = "matrixInputForm";
+            this.Name = "InputForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "matrixInputForm";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -121,6 +144,8 @@
         private System.Windows.Forms.TextBox filePathSelection;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox fldContent;
-        private System.Windows.Forms.Button butMatrixProcessing;
+        private System.Windows.Forms.Button butSaveFile;
+        private System.Windows.Forms.Button butAlterChange;
+        private System.Windows.Forms.Button butProcessingMatrix;
     }
 }
