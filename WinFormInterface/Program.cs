@@ -14,15 +14,21 @@ namespace WinFormInterface
         private readonly IFileManager _manager;
         private readonly IMessageService _messageService;
         private readonly ISelfAssesForm _selfAsses;
+        private readonly IResultForm _resultForm;
+        private int i, j, x, y;
+        PreferenceMatrix matrix;
+        int[] orderedIndexAlternatives;
 
         public MainPresenter(ImodeSelectionForm selectForm, IFileManager manager,
-            IMessageService service, ISelfAssesForm selfAsses, IInputForm inputForm)
+            IMessageService service, ISelfAssesForm selfAsses, IInputForm inputForm,
+            IResultForm resultForm)
         {
             _selectForm = selectForm;
             _manager = manager;
             _messageService = service;
             _inputForm = inputForm;
             _selfAsses = selfAsses;
+            _resultForm = resultForm;
 
             _selectForm.FinishMatrixClick += _selectForm_FinishMatrixClick;
             _selectForm.SelfAssesClick += _selectForm_SelfAssesClick;
@@ -31,6 +37,36 @@ namespace WinFormInterface
             _inputForm.FileSaveClick += _inputForm_FileSaveClick;
             _inputForm.ButAlterChangeClick += _inputForm_WriteAlternatives;
             _inputForm.ButProcessingClick += _inputForm_ProcessingMatrixClick;
+            _selfAsses.ChoiceClick += _selfAsses_ChoiceClick;
+            matrix = new PreferenceMatrix(manager.Alternatives.Length);
+        }
+
+        private void _selfAsses_ChoiceClick(object sender, EventArgs e)
+        {
+            x = i; y = j;
+            if (i < _manager.Alternatives.Length)
+                j++;
+            if (j >= _manager.Alternatives.Length) { i++; j = 0; }
+            if (i == j)
+            {
+                j++;
+                if (j >= _manager.Alternatives.Length) { i++; j = 0; }
+            }
+            if (i < _manager.Alternatives.Length)
+            {
+                _selfAsses.Alternative1 = _manager.Alternatives[i];
+                _selfAsses.Alternative2 = _manager.Alternatives[j];
+                matrix[x, y] = _selfAsses.ButValue;
+            }
+            else
+            {
+                if (x < _manager.Alternatives.Length)
+                    matrix[x, y] = _selfAsses.ButValue;
+                orderedIndexAlternatives = matrix.PreferenceMatrixProcessing();
+                _resultForm.PrintResult(orderedIndexAlternatives, _manager.Alternatives);
+                _selfAsses.HideForm();
+                _resultForm.ShowForm();
+            }
         }
 
         private void _selectForm_AlterChangeClick(object sender, EventArgs e)
@@ -45,6 +81,7 @@ namespace WinFormInterface
         {
             _manager.SaveContent(_inputForm.Content);
             _manager.WriteAlternatives();
+            matrix = new PreferenceMatrix(_manager.Alternatives.Length);
             _messageService.ShowMessage("lol");
         }
 
@@ -77,7 +114,18 @@ namespace WinFormInterface
 
         private void _selectForm_SelfAssesClick(object sender, EventArgs e)
         {
+            i = 0; j = 1;
+            _selfAsses.Alternative1 = _manager.Alternatives[i];
+            _selfAsses.Alternative2 = _manager.Alternatives[j];
             _selfAsses.ShowForm();
+            //for (int i = 0; i < _manager.Alternatives.Length - 1; i++)
+            //    for (int j = 0; j < _manager.Alternatives.Length; j++)
+            //        if (i != j)
+            //        {
+            //            _selfAsses.Alternative1 = _manager.Alternatives[i];
+            //            _selfAsses.Alternative2 = _manager.Alternatives[j];
+                        
+            //        }
         }
 
         private void _matrixForm_FileOpenClick(object sender, EventArgs e)
@@ -116,9 +164,10 @@ namespace WinFormInterface
             FileManager manager = new FileManager();
             MessageService service = new MessageService();
             SelfAssesForm selfAsses = new SelfAssesForm();
+            ResultForm resultForm = new ResultForm();
 
             MainPresenter presenter = new MainPresenter(selectForm, manager,
-                service, selfAsses, inputForm);
+                service, selfAsses, inputForm, resultForm);
 
             Application.Run(selectForm);
         }

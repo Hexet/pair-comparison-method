@@ -20,11 +20,12 @@ namespace ClassLibrary
     public class FileManager: IFileManager
     {
         string filePath = "alternative.txt";
+        
         string[] alternatives;
 
         public void WriteAlternatives()
         {
-            alternatives = File.ReadAllLines(filePath);
+            alternatives = File.ReadAllLines(filePath, Encoding.GetEncoding(1251));
         }
         public string[] Alternatives
         {
@@ -33,7 +34,7 @@ namespace ClassLibrary
 
         public string Content
         {
-            get { return File.ReadAllText(filePath, System.Text.Encoding.Default); }
+            get { return File.ReadAllText(filePath, Encoding.GetEncoding(1251)); }
         }
         public string FilePath
         {
@@ -41,7 +42,7 @@ namespace ClassLibrary
         }
         public void SaveContent(string content)
         {
-            File.WriteAllText(filePath, content, System.Text.Encoding.Default);
+            File.WriteAllText(filePath, content, Encoding.GetEncoding(1251));
         }
         public bool isExist()
         {
