@@ -98,6 +98,11 @@ namespace WinFormInterface
         {
             _manager.SaveContent(_inputForm.Content);
             _manager.WriteStringMatrix();
+            if (_manager.Alternatives.Length < 2)
+            {
+                _messageService.ShowError("Недостаточно альтернатив");
+                return;
+            }
             if (_manager.StringMatrix.Length != matrix.size)
             {
                 _messageService.ShowError("Неверный формат ввода данных");
@@ -161,6 +166,11 @@ namespace WinFormInterface
 
         private void _selectForm_SelfAssesClick(object sender, EventArgs e)
         {
+            if (_manager.Alternatives.Length < 2)
+            {
+                _messageService.ShowError("Недостаточно альтернатив");
+                return;
+            }
             i = 0; j = 1;
             _selfAsses.Alternative1 = _manager.Alternatives[i];
             _selfAsses.Alternative2 = _manager.Alternatives[j];
