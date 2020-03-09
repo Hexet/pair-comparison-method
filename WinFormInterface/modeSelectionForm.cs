@@ -25,22 +25,18 @@ namespace WinFormInterface
             butSelfAssessment.Click += ButSelfAssessment_Click;
             butAlterChange.Click += ButAlterChange_Click;
         }
-
         private void ButAlterChange_Click(object sender, EventArgs e)
         {
             AlterChangeClick(this, null);
         }
-
         private void ButSelfAssessment_Click(object sender, EventArgs e)
         {
             SelfAssesClick(this, null);
         }
-
         private void ButFinishedMatrix_Click(object sender, EventArgs e)
         {
             FinishMatrixClick(this, null);
         }
-
         public event EventHandler SelfAssesClick;
         public event EventHandler FinishMatrixClick;
         public event EventHandler AlterChangeClick;

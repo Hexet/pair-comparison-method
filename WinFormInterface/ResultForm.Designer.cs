@@ -54,7 +54,7 @@
             this.Controls.Add(this.ResultBox);
             this.Name = "ResultForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ResultForm";
+            this.Text = "Результат";
             this.ResumeLayout(false);
             this.PerformLayout();
 

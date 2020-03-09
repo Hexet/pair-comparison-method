@@ -70,7 +70,7 @@
             this.Controls.Add(this.butChoice1);
             this.Name = "SelfAssesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SelfAssesForm";
+            this.Text = "Самостоятельный выбор альтернатив";
             this.ResumeLayout(false);
 
         }

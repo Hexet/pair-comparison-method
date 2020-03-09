@@ -32,7 +32,6 @@ namespace WinFormInterface
                 ResultBox.Text += alternatives[orderedIndexAlternatives[i]] + Environment.NewLine;
             }
         }
-
         public void ShowForm()
         {
             this.ShowDialog();

@@ -14,11 +14,13 @@ namespace WinFormInterface
     {
         string FilePath { get; }
         string Content { get; set; }
+        string NameForm { set; }
         event EventHandler FileOpenClick;
         event EventHandler FileSaveClick;
         event EventHandler ButProcessingClick;
         event EventHandler ButAlterChangeClick;
         void ShowForm();
+        void HideForm();
         void ShowButProcessing();
         void ShowButAlterChange();
 
@@ -99,6 +101,14 @@ namespace WinFormInterface
             butAlterChange.Visible = true;
             butProcessingMatrix.Enabled = false;
             butProcessingMatrix.Visible = false;
+        }
+        public void HideForm()
+        {
+            this.Hide();
+        }
+        public string NameForm
+        {
+            set { this.Text = value; }
         }
     }
 }

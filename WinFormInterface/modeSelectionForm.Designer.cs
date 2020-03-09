@@ -76,7 +76,7 @@
             this.Controls.Add(this.butFinishedMatrix);
             this.Name = "modeSelectionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "modeSelectionForm";
+            this.Text = "Оценка альтернатив методом парных сравнений";
             this.ResumeLayout(false);
 
         }

@@ -72,6 +72,7 @@ namespace WinFormInterface
         private void _selectForm_AlterChangeClick(object sender, EventArgs e)
         {
             _manager.FilePath = "alternative.txt";
+            _inputForm.NameForm = "Изменение альтернатив";
             _inputForm.Content = _manager.Content;
             _inputForm.ShowButAlterChange();
             _inputForm.ShowForm();
@@ -82,12 +83,12 @@ namespace WinFormInterface
             _manager.SaveContent(_inputForm.Content);
             _manager.WriteAlternatives();
             matrix = new PreferenceMatrix(_manager.Alternatives.Length);
-            _messageService.ShowMessage("lol");
         }
 
         private void _selectForm_FinishMatrixClick(object sender, EventArgs e)
         {
             _manager.FilePath = "matrix.txt";
+            _inputForm.NameForm = "Ввод готовой матрицы предпочтений";
             _inputForm.Content = _manager.Content;
             _inputForm.ShowButProcessing();
             _inputForm.ShowForm();
@@ -95,7 +96,54 @@ namespace WinFormInterface
 
         private void _inputForm_ProcessingMatrixClick(object sender, EventArgs e)
         {
-            _messageService.ShowMessage("ok");
+            _manager.SaveContent(_inputForm.Content);
+            _manager.WriteStringMatrix();
+            if (_manager.StringMatrix.Length != matrix.size)
+            {
+                _messageService.ShowError("Неверный формат ввода данных");
+                return;
+            }
+            string[] str;
+            for (int a = 0; a < _manager.StringMatrix.Length; a++)
+            {
+                str = _manager.StringMatrix[a].Split(new char[] { ' ' });
+                if (str.Length != matrix.size && str.Length != matrix.size - 1)
+                {
+                    _messageService.ShowError("Неверный формат ввода данных");
+                    return;
+                }
+                if (str.Length == matrix.size)
+                {
+                    Array.Copy(str, 1, str, 0, str.Length - 1);
+                }
+                for (int b = 0, c = 0; b < matrix.size - 1; b++, c++)
+                {
+                    if (a == b)
+                        c++;
+                    if (String.Compare(str[b], "0") == 0)
+                    {
+                        matrix[a, c] = 0;
+                    }
+                    else if (String.Compare(str[b], "1") == 0)
+                    {
+                        matrix[a, c] = 1;
+                    }
+                    else if (String.Compare(str[b], "1/2") == 0)
+                    {
+                        matrix[a, c] = 0.5f;
+                    }
+                    else
+                    {
+                        _messageService.ShowError("Неверный формат ввода данных");
+                        return;
+                    }
+                }
+            }
+
+            orderedIndexAlternatives = matrix.PreferenceMatrixProcessing();
+            _resultForm.PrintResult(orderedIndexAlternatives, _manager.Alternatives);
+            _inputForm.HideForm();
+            _resultForm.ShowForm();
         }
 
 
@@ -104,7 +152,6 @@ namespace WinFormInterface
             try
             {
                 _manager.SaveContent(_inputForm.Content);
-                //_messageService.ShowMessage("Файл успешно сохранен.");
             }
             catch (Exception ex)
             {
@@ -118,14 +165,6 @@ namespace WinFormInterface
             _selfAsses.Alternative1 = _manager.Alternatives[i];
             _selfAsses.Alternative2 = _manager.Alternatives[j];
             _selfAsses.ShowForm();
-            //for (int i = 0; i < _manager.Alternatives.Length - 1; i++)
-            //    for (int j = 0; j < _manager.Alternatives.Length; j++)
-            //        if (i != j)
-            //        {
-            //            _selfAsses.Alternative1 = _manager.Alternatives[i];
-            //            _selfAsses.Alternative2 = _manager.Alternatives[j];
-                        
-            //        }
         }
 
         private void _matrixForm_FileOpenClick(object sender, EventArgs e)
