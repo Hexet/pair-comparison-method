@@ -47,7 +47,6 @@ namespace WinFormInterface
                     button = -1;
                     break;
             }
-            //button = (int)(sender as Button).Name[9] - 48;
             ChoiceClick(this, null);
         }
 

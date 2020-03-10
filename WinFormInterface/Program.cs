@@ -125,22 +125,23 @@ namespace WinFormInterface
                 {
                     if (a == b)
                         c++;
-                    if (String.Compare(str[b], "0") == 0)
+
+                    switch (str[b])
                     {
-                        matrix[a, c] = 0;
-                    }
-                    else if (String.Compare(str[b], "1") == 0)
-                    {
-                        matrix[a, c] = 1;
-                    }
-                    else if (String.Compare(str[b], "1/2") == 0)
-                    {
-                        matrix[a, c] = 0.5f;
-                    }
-                    else
-                    {
-                        _messageService.ShowError("Неверный формат ввода данных");
-                        return;
+                        case "0":
+                            matrix[a, c] = 0;
+                            break;
+                        case "1":
+                            matrix[a, c] = 1;
+                            break;
+                        case "1/2":
+                        case "0.5":
+                        case "0,5":
+                            matrix[a, c] = 0.5f;
+                            break;
+                        default:
+                            _messageService.ShowError("Неверный формат ввода данных");
+                            return;
                     }
                 }
             }
